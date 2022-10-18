@@ -12,7 +12,8 @@ const Categories = () => {
         `
     *[_type == "category"] {
       image,
-      name
+      name,
+      _id,
     }`
       )
       .then((data) => {
@@ -28,6 +29,7 @@ const Categories = () => {
     >
       {categories?.map((category) => (
         <CategoryCard
+          key={category._id}
           imgUrl={category.image.asset._ref}
           title={category.name}
         />

@@ -3,7 +3,7 @@ import React from 'react'
 import { ArrowRightIcon } from 'react-native-heroicons/outline'
 import RestaurantCard from './RestaurantCard'
 
-const FeaturedRow = ({id, title, description}) => {
+const FeaturedRow = ({id, title, description, restaurants}) => {
   return (
     <View>
       <View className="mt-4 flex-row items-center justify-between px-4">
@@ -20,18 +20,21 @@ const FeaturedRow = ({id, title, description}) => {
       className="pt-4"
       >
         {/*RESTAURANT CARD */}
-        <RestaurantCard 
-         id="123"
-         imgUrl="https://i.pinimg.com/736x/36/04/c5/3604c501a5a9a91a267dd4f2f5b88404.jpg"
-         title="Pizza House"
-         rating={4.5}
-         genre="Italian"
-         address="123 Main St"
-         short_description="This is a pizza place"
-         dishes={[]}
-         long={20}
-         lat={0}
-        />
+        {restaurants?.map(restaurant => (
+          <RestaurantCard 
+          key={restaurant._id}
+          id={restaurant._id}
+          imgUrl={restaurant.image.asset._ref}
+          title={restaurant.name}
+          rating={restaurant.rating}
+          genre={restaurant.type.name}
+          address={restaurant.address}
+          short_description={restaurant.short_description}
+          dishes={restaurant.dishes}
+          long={restaurant.long}
+          lat={restaurant.lat}
+         />
+        ))}
       </ScrollView>
     </View>
   )
