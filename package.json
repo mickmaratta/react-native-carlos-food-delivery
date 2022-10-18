@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@react-navigation/native-stack": "^6.9.1",
+    "@sanity/client": "^3.4.1",
+    "@sanity/image-url": "^1.0.1",
     "@types/react": "~18.0.0",
     "@types/react-native": "~0.69.1",
     "expo": "~46.0.16",
