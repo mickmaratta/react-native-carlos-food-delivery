@@ -95,6 +95,7 @@ export default function HomeScreen() {
         {featuredCategories.map((featuredCategory) => (
           <FeaturedRow
             key={featuredCategory._id}
+            id={featuredCategory._id}
             title={featuredCategory.name}
             description={featuredCategory.short_description}
             restaurants={featuredCategory.restaurants}
