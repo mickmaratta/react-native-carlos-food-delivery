@@ -1,10 +1,13 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
-import { urlFor } from '../sanity'
+import { View, Text, TouchableOpacity, Image } from 'react-native';
+import React from 'react';
+import { urlFor } from '../sanity';
+import { useNavigation } from "@react-navigation/native";
 
-const CategoryCard = ({imgUrl, title}) => {
+const CategoryCard = ({imgUrl, title, restaurants}) => {
+const navigation = useNavigation();
+
   return (
-    <TouchableOpacity className="relative mr-2">
+    <TouchableOpacity className="relative mr-2" onPress={()=> {navigation.navigate("Category", {restaurants, title})}}>
         <Image source={{
             uri: urlFor(imgUrl).url(),
         }}

@@ -10,16 +10,25 @@ const Categories = () => {
     client
       .fetch(
         `
-    *[_type == "category"] {
-      image,
-      name,
-      _id,
-    }`
+        *[_type == "category"] {
+          name,
+          short_description,
+          _id,
+          ...,
+          restaurants[]->{
+            ...,
+            dishes[]->,
+            type-> {
+              name
+            }
+          },
+        }`
       )
       .then((data) => {
         setCategories(data);
       });
   }, []);
+
 
   return (
     <ScrollView
@@ -32,6 +41,7 @@ const Categories = () => {
           key={category._id}
           imgUrl={category.image.asset._ref}
           title={category.name}
+          restaurants={category.restaurants}
         />
       ))}
       <Text></Text>
