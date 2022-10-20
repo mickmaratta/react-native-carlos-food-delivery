@@ -10,7 +10,7 @@ import React, { useMemo, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { selectRestaurant } from "../redux/restaurantSlice";
-import { selectBasketItems } from "../redux/basketSlice";
+import { selectBasketItems, selectBasketTotal } from "../redux/basketSlice";
 import { XCircleIcon } from "react-native-heroicons/solid";
 import { urlFor } from "../sanity";
 import { removeFromBasket } from "../redux/basketSlice";
@@ -19,6 +19,9 @@ const BasketScreen = () => {
   const navigation = useNavigation();
   const restaurant = useSelector(selectRestaurant);
   const items = useSelector(selectBasketItems);
+  const basketTotal = useSelector(selectBasketTotal);
+  const deliveryFee = 5.99;
+  const orderTotal = (basketTotal + deliveryFee).toFixed(2);
   const [groupedItemsInBasket, setGroupedItemsInBasket] = useState([]);
   const dispatch = useDispatch();
 
@@ -31,7 +34,6 @@ const BasketScreen = () => {
     setGroupedItemsInBasket(groupedItems);
   }, [items]);
 
-  console.log(restaurant);
 
   return (
     <SafeAreaView className="flex-1">
@@ -86,6 +88,24 @@ const BasketScreen = () => {
             </View>
           ))}
         </ScrollView>
+
+        <View className="p-5 bg-white mt-5 space-y-4">
+          <View className="flex-row justify-between">
+            <Text className="text-gray-400" >Subtotal</Text>
+            <Text className="text-gray-400" >$ {basketTotal.toFixed(2)}</Text>
+          </View>
+          <View className="flex-row justify-between">
+            <Text className="text-gray-400" >Delivery Fee</Text>
+            <Text className="text-gray-400" >$ {deliveryFee}</Text>
+          </View>
+          <View className="flex-row justify-between">
+            <Text>Order Total</Text>
+            <Text className="font-extrabold" >$ {orderTotal}</Text>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate("PreparingOrderScreen")} className="rounded-lg bg-[#00CCBB] p-4">
+            <Text className="text-center text-white text-lg font-bold">Place Order</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );

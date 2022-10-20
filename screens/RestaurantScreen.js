@@ -20,6 +20,8 @@ import DishRow from "../components/DishRow";
 import BasketIcon from "../components/BasketIcon";
 import { useDispatch } from "react-redux";
 import { setRestaurant } from "../redux/restaurantSlice";
+import restaurant from "../sanity/schemas/restaurant";
+import { clearBasket } from "../redux/basketSlice";
 
 const RestaurantScreen = () => {
   const navigation = useNavigation();
@@ -54,6 +56,7 @@ const RestaurantScreen = () => {
         lat,
       })
     );
+    dispatch(clearBasket())
   }, [dispatch]);
   
   useLayoutEffect(() => {
